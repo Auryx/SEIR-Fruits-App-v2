@@ -3,7 +3,9 @@
 <%- include('../partials/head.ejs')%>
 <body>
     <%- include('../partials/header.ejs')%>
+    <p><%= user%></p>
     <h3><a href="/fruits/new">Create New Fruit</a></h3>
+    <h4><a href="/user/logout">Logout</a></h4>
     <main>
         <div>
             <% for (fruit of fruits){%>

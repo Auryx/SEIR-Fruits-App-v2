@@ -5,7 +5,7 @@
   "main": "connection.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch server.js",
+    "dev": "nodemon server.js",
     "start": "node server.js"
   },
   "keywords": [],
@@ -21,5 +21,8 @@
     "gitignore": "^0.7.0",
     "method-override": "^3.0.0",
     "mongoose": "^7.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }

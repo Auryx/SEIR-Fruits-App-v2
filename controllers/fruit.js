@@ -3,11 +3,21 @@ const Fruit = require('../models/fruit')
 
 const router = express.Router()
 
-
+router.use((req, res, next) => {
+    //req,session
+    //check if user is logged in via .session.loggedIn (controller/user.js)
+    //if user loggedIn, use next(), gives access to all following routes
+    //else redirect to login & signup
+    if(req.session.loggedIn){
+        next();
+    }else{
+        res.redirect('/')
+    }
+})
 
 router.get('/', async (req, res) => {
-    const allFruits = await Fruit.find({})
-    res.render('./fruits/index.ejs', {fruits: allFruits})
+    const allFruits = await Fruit.find({username: req.session.username})
+    res.render('./fruits/index.ejs', {fruits: allFruits, user: req.session.username})
 })
 
 router.get('/new', (req, res) => {
@@ -20,6 +30,9 @@ router.post('/', async (req, res) => {
     }else{
         req.body.readyToEat = false
     }
+
+    req.body.username = req.session.username
+
     await Fruit.create(req.body)
     res.redirect('/fruits')
 })
